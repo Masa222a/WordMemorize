@@ -23,13 +23,15 @@ class MainActivity : AppCompatActivity() {
         realm = Realm.getDefaultInstance()
 
         binding.start.setOnClickListener {
-            val words = realm.where<Word>().findAll()
-            if (words.isEmpty()) {
+            val wordRecords = realm.where<Word>().findAll()
+
+            if (wordRecords.isEmpty()) {
                 val dialog = AlertDialog.Builder(this)
                     .setMessage("単語を追加してください")
                     .setPositiveButton("OK") { dialog, which -> }
                     .show()
             } else {
+
                 binding.start.isVisible = false
                 binding.addWord.isVisible = false
                 supportFragmentManager.beginTransaction().apply {
