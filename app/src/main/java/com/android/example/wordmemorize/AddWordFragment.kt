@@ -38,7 +38,15 @@ class AddWordFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.addButton.setOnClickListener { saveWord(it) }
+        binding.addButton.setOnClickListener {
+        val en = binding.createEnword.text.toString()
+        val jp = binding.createJpword.text.toString()
+            if (en == "" || jp == "") {
+                Snackbar.make(view, "文字を入力してください", Snackbar.LENGTH_SHORT).show()
+            } else {
+                saveWord(it)
+            }
+        }
     }
 
     private fun saveWord(view: View) {
