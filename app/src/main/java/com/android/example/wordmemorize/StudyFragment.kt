@@ -9,9 +9,6 @@ import androidx.core.view.isVisible
 import com.android.example.wordmemorize.databinding.FragmentStudyBinding
 import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
-import io.realm.RealmQuery
-import io.realm.kotlin.createObject
-import io.realm.kotlin.where
 import java.lang.IllegalArgumentException
 import kotlin.random.Random
 
@@ -19,13 +16,12 @@ class StudyFragment : Fragment() {
     private var _binding: FragmentStudyBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var realm: Realm
     private val words = mutableListOf<Word>()
     private val currentWords = mutableListOf<Word>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        realm = Realm.getDefaultInstance()
+        Realm.getDefaultInstance()
     }
 
     override fun onCreateView(
@@ -34,7 +30,8 @@ class StudyFragment : Fragment() {
     ): View? {
         _binding = FragmentStudyBinding.inflate(inflater, container, false)
 
-        val words = words.addAll(realm.where<Word>().findAll())
+        words.addAll(RealmManager().getWords())
+
         try {
             setWord()
             binding.jpWord.isVisible = false

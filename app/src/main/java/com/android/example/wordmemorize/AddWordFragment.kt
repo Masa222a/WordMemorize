@@ -16,13 +16,6 @@ class AddWordFragment : Fragment() {
     private var _binding: FragmentAddWordBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var realm: Realm
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        realm = Realm.getDefaultInstance()
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,20 +37,10 @@ class AddWordFragment : Fragment() {
             if (en == "" || jp == "") {
                 Snackbar.make(view, "文字を入力してください", Snackbar.LENGTH_SHORT).show()
             } else {
-                saveWord(it)
+                RealmManager().saveWord(en, jp)
+                Snackbar.make(view, "追加しました", Snackbar.LENGTH_SHORT).show()
             }
         }
-    }
-
-    private fun saveWord(view: View) {
-        realm.executeTransaction { db: Realm ->
-            val maxId = db.where<Word>().max("id")
-            val nextId = (maxId?.toLong() ?: 0L) + 1L
-            val words = db.createObject<Word>(nextId)
-            words.word = binding.createEnword.text.toString()
-            words.meaning = binding.createJpword.text.toString()
-        }
-        Snackbar.make(view, "追加しました", Snackbar.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {
@@ -67,7 +50,7 @@ class AddWordFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        realm.close()
+        Realm.getDefaultInstance().close()
         _binding = null
     }
 }
