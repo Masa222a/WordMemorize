@@ -27,4 +27,14 @@
         app:layout_constraintStart_toStartOf="@+id/start"
         app:layout_constraintTop_toBottomOf="@+id/start" />
 
+    <Button
+        android:id="@+id/word_List"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="単語一覧"
+        app:layout_constraintEnd_toEndOf="@+id/add_Word"
+        app:layout_constraintStart_toStartOf="@+id/add_Word"
+        app:layout_constraintTop_toBottomOf="@+id/add_Word" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

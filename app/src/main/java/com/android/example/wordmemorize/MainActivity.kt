@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
             } else {
                 binding.start.isVisible = false
                 binding.addWord.isVisible = false
+                binding.wordList.isVisible = false
 
                 supportFragmentManager.beginTransaction().apply {
                     replace(R.id.container, StudyFragment())
@@ -40,9 +41,23 @@ class MainActivity : AppCompatActivity() {
         binding.addWord.setOnClickListener {
             binding.start.isVisible = false
             binding.addWord.isVisible = false
+            binding.wordList.isVisible = false
 
             supportFragmentManager.beginTransaction().apply {
                 replace(R.id.container, AddWordFragment())
+                addToBackStack(null)
+                commit()
+            }
+        }
+
+        binding.wordList.setOnClickListener {
+            binding.start.isVisible = false
+            binding.addWord.isVisible = false
+            binding.wordList.isVisible = false
+
+
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.container, WordListFragment(), "id")
                 addToBackStack(null)
                 commit()
             }
