@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/PC_User/AndroidStudioProjects/WordMemorize/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/PC_User/AndroidStudioProjects/WordMemorize/app/src/main/res/layout/cell_word.xml" value="0.25" />
         <entry key="..\:/Users/PC_User/AndroidStudioProjects/WordMemorize/app/src/main/res/layout/fragment_add_word.xml" value="0.25" />
         <entry key="..\:/Users/PC_User/AndroidStudioProjects/WordMemorize/app/src/main/res/layout/fragment_first.xml" value="0.33" />
         <entry key="..\:/Users/PC_User/AndroidStudioProjects/WordMemorize/app/src/main/res/layout/fragment_study.xml" value="0.15" />

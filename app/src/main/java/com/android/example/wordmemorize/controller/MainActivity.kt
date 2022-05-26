@@ -1,15 +1,20 @@
-package com.android.example.wordmemorize
+package com.android.example.wordmemorize.controller
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
-import androidx.core.view.isVisible
+import androidx.fragment.app.FragmentManager
+import com.android.example.wordmemorize.model.RealmManager
+import com.android.example.wordmemorize.R
+import com.android.example.wordmemorize.view.AddWordFragment
+import com.android.example.wordmemorize.view.StudyFragment
+import com.android.example.wordmemorize.view.WordListFragment
 import com.android.example.wordmemorize.databinding.ActivityMainBinding
 import io.realm.Realm
 
 
 class MainActivity : AppCompatActivity() {
-    private var binding: ActivityMainBinding? = null
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,45 +26,48 @@ class MainActivity : AppCompatActivity() {
             val wordRecords = RealmManager().getWords()
 
             if (wordRecords.isEmpty()) {
-                val dialog = AlertDialog.Builder(this)
+                AlertDialog.Builder(this)
                     .setMessage("単語を追加してください")
-                    .setPositiveButton("OK") { dialog, which -> }
+                    .setPositiveButton("OK") { _, _ -> }
                     .show()
             } else {
-                binding.start.isVisible = false
-                binding.addWord.isVisible = false
-                binding.wordList.isVisible = false
+//                binding.start.isVisible = false
+//                binding.addWord.isVisible = false
+//                binding.wordList.isVisible = false
 
                 supportFragmentManager.beginTransaction().apply {
                     replace(R.id.container, StudyFragment())
-                    addToBackStack(null)
+                    addToBackStack("MainActivity")
                     commit()
+                    fragmentManager.popBackStack("MainActivity", FragmentManager.POP_BACK_STACK_INCLUSIVE)
                 }
             }
         }
 
         binding.addWord.setOnClickListener {
-            binding.start.isVisible = false
-            binding.addWord.isVisible = false
-            binding.wordList.isVisible = false
+//            binding.start.isVisible = false
+//            binding.addWord.isVisible = false
+//            binding.wordList.isVisible = false
 
             supportFragmentManager.beginTransaction().apply {
                 replace(R.id.container, AddWordFragment())
-                addToBackStack(null)
+                addToBackStack("MainActivity")
                 commit()
+                fragmentManager.popBackStack("MainActivity", FragmentManager.POP_BACK_STACK_INCLUSIVE)
             }
         }
 
         binding.wordList.setOnClickListener {
-            binding.start.isVisible = false
-            binding.addWord.isVisible = false
-            binding.wordList.isVisible = false
+//            binding.start.isVisible = false
+//            binding.addWord.isVisible = false
+//            binding.wordList.isVisible = false
 
 
             supportFragmentManager.beginTransaction().apply {
                 replace(R.id.container, WordListFragment(), "id")
-                addToBackStack(null)
+                addToBackStack("MainActivity")
                 commit()
+                fragmentManager.popBackStack("MainActivity", FragmentManager.POP_BACK_STACK_INCLUSIVE)
             }
         }
     }

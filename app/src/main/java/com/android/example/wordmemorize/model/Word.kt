@@ -1,4 +1,4 @@
-package com.android.example.wordmemorize
+package com.android.example.wordmemorize.model
 
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey

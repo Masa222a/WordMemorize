@@ -1,4 +1,4 @@
-package com.android.example.wordmemorize
+package com.android.example.wordmemorize.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import com.android.example.wordmemorize.model.RealmManager
+import com.android.example.wordmemorize.model.Word
 import com.android.example.wordmemorize.databinding.FragmentStudyBinding
 import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
@@ -13,8 +15,7 @@ import java.lang.IllegalArgumentException
 import kotlin.random.Random
 
 class StudyFragment : Fragment() {
-    private var _binding: FragmentStudyBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentStudyBinding
 
     private val words = mutableListOf<Word>()
     private val currentWords = mutableListOf<Word>()
@@ -28,7 +29,7 @@ class StudyFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentStudyBinding.inflate(inflater, container, false)
+        binding = FragmentStudyBinding.inflate(inflater, container, false)
 
         words.addAll(RealmManager().getWords())
 
@@ -71,13 +72,4 @@ class StudyFragment : Fragment() {
         currentWords.add(word)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
 }

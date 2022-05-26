@@ -1,4 +1,4 @@
-package com.android.example.wordmemorize
+package com.android.example.wordmemorize.model
 
 import android.app.Application
 import io.realm.Realm
